@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Ed-Tech Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #58a6ff;
+            --background-color: #0d1117;
+            --card-background: #161b22;
+            --text-color: #c9d1d9;
+            --muted-text: #8b949e;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .card {
+            background-color: var(--card-background);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, #58a6ff, #99c2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-background-color bg-opacity-90 backdrop-blur-sm transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-primary-color">Your Name</a>
+            <div class="flex space-x-6">
+                <a href="#about" class="text-muted-text hover:text-primary-color transition-colors">About</a>
+                <a href="#work" class="text-muted-text hover:text-primary-color transition-colors">Work</a>
+                <a href="#blog" class="text-muted-text hover:text-primary-color transition-colors">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Hero Section -->
+        <section id="about" class="flex flex-col md:flex-row items-center justify-between py-20 md:space-x-12">
+            <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+                <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight text-gradient mb-4">
+                    Championing the Future of Education with Technology.
+                </h1>
+                <p class="text-lg sm:text-xl text-muted-text mb-6">
+                    I'm an educator and a technologist, dedicated to creating intelligent, effective, and accessible learning experiences for all. My work focuses on leveraging AI and data to personalize learning and empower both students and teachers.
+                </p>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="#work" class="bg-primary-color hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                        View My Work
+                    </a>
+                    <a href="#blog" class="bg-card-background border border-muted-text hover:border-primary-color text-muted-text hover:text-primary-color font-bold py-3 px-6 rounded-lg transition-colors">
+                        Read My Blog
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <!-- Placeholder image for your professional headshot -->
+                <img src="https://placehold.co/400x400/161b22/c9d1d9?text=Your+Photo" alt="Your professional headshot" class="rounded-full border-4 border-card-background shadow-xl">
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12">Featured Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 Card -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-primary-color mb-2">AI-Powered Math Tutor</h3>
+                    <p class="text-sm text-muted-text mb-4">
+                        Designed and developed a conversational AI to provide personalized, step-by-step guidance to students struggling with algebra.
+                    </p>
+                    <a href="#" class="text-primary-color hover:underline text-sm font-medium">Read Case Study &rarr;</a>
+                </div>
+                <!-- Project 2 Card -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-primary-color mb-2">Data-Driven Curriculum Tool</h3>
+                    <p class="text-sm text-muted-text mb-4">
+                        Built a dashboard for educators to visualize student performance data and adapt lesson plans in real-time for improved outcomes.
+                    </p>
+                    <a href="#" class="text-primary-color hover:underline text-sm font-medium">Read Case Study &rarr;</a>
+                </div>
+                <!-- Project 3 Card -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-primary-color mb-2">Interactive Learning Platform</h3>
+                    <p class="text-sm text-muted-text mb-4">
+                        Led the development of a gamified platform that makes complex scientific concepts engaging and easy to understand for middle school students.
+                    </p>
+                    <a href="#" class="text-primary-color hover:underline text-sm font-medium">Read Case Study &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12">Latest Insights</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Post 1 Card -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-primary-color mb-2">The Case for AI in Education</h3>
+                    <p class="text-sm text-muted-text mb-4">
+                        Exploring why artificial intelligence is no longer a futuristic concept but a necessary tool for modern classrooms.
+                    </p>
+                    <a href="#" class="text-primary-color hover:underline text-sm font-medium">Read Article &rarr;</a>
+                </div>
+                <!-- Blog Post 2 Card -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-primary-color mb-2">Personalized Learning Paths</h3>
+                    <p class="text-sm text-muted-text mb-4">
+                        A deep dive into how personalized learning can be scaled and implemented effectively with technology.
+                    </p>
+                    <a href="#" class="text-primary-color hover:underline text-sm font-medium">Read Article &rarr;</a>
+                </div>
+                <!-- Blog Post 3 Card -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold text-primary-color mb-2">Bridging the Digital Divide</h3>
+                    <p class="text-sm text-muted-text mb-4">
+                        Strategies for using accessible technology to ensure all students have an equal opportunity to succeed.
+                    </p>
+                    <a href="#" class="text-primary-color hover:underline text-sm font-medium">Read Article &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card-background py-8">
+        <div class="container mx-auto px-6 text-center text-sm text-muted-text">
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+            <p>Built with purpose.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -9,17 +9,28 @@
     <style>
         :root {
             --primary-color: #58a6ff;
-            --background-color: #0d1117;
+            /* solid black background for dark mode */
+            --background-color: #000000;
+            --background-gradient: none;
             --card-background: #161b22;
             --text-color: #c9d1d9;
             --muted-text: #8b949e;
             font-family: 'Inter', sans-serif;
+        }
+
+        /* Light theme variables */
+        :root.light {
+            --background-color: #ffffff;
+            --card-background: #f6f8fa;
+            --text-color: #0f1720;
+            --muted-text: #475569;
         }
         body {
             background-color: var(--background-color);
             color: var(--text-color);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            transition: background-color 300ms ease, color 300ms ease;
         }
         .container {
             max-width: 1200px;
@@ -29,7 +40,7 @@
             border: 1px solid #30363d;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 300ms ease, border-color 300ms ease;
         }
         .card:hover {
             transform: translateY(-5px);
@@ -37,21 +48,58 @@
         }
         .text-gradient {
             background: linear-gradient(90deg, #58a6ff, #99c2ff);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        /* Utility colors that read from CSS variables so tailwind-like classes can work */
+        .bg-site {
+            /* solid dark background; light theme will override to solid white */
+            background-color: var(--background-color);
+        }
+        .text-site {
+            color: var(--text-color);
+        }
+        .text-muted-site {
+            color: var(--muted-text);
+        }
+        /* Improve card contrast in dark mode (slightly lighter than body) */
+        :root {
+            --card-contrast-dark: #0f1418;
+        }
+        :root.light {
+            --card-contrast-dark: var(--card-background);
+        }
+        .card {
+            background-color: var(--card-contrast-dark);
+        }
+        .card {
+            background-color: var(--card-background);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
     </style>
 </head>
-<body class="antialiased">
+    <body class="antialiased bg-site text-site">
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-background-color bg-opacity-90 backdrop-blur-sm transition-all duration-300">
+    <nav class="sticky top-0 z-50 bg-site backdrop-blur-sm transition-all duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-xl font-bold text-primary-color">Your Name</a>
-            <div class="flex space-x-6">
-                <a href="#about" class="text-muted-text hover:text-primary-color transition-colors">About</a>
-                <a href="#work" class="text-muted-text hover:text-primary-color transition-colors">Work</a>
-                <a href="#blog" class="text-muted-text hover:text-primary-color transition-colors">Blog</a>
+            <div class="flex items-center space-x-6">
+                <div class="hidden md:flex space-x-6">
+                    <a href="#about" class="text-muted-site hover:text-primary-color transition-colors">About</a>
+                    <a href="#work" class="text-muted-site hover:text-primary-color transition-colors">Work</a>
+                    <a href="#blog" class="text-muted-site hover:text-primary-color transition-colors">Blog</a>
+                </div>
+                <!-- Theme toggle (sun/moon icons) -->
+                <button id="theme-toggle" aria-label="Toggle light/dark theme" class="px-3 py-2 rounded-lg border border-transparent hover:border-muted-text transition-colors text-muted-site flex items-center" title="Toggle theme">
+                    <!-- Icon placeholder; JS will set innerHTML to the appropriate SVG -->
+                    <span id="theme-icon" aria-hidden="true"></span>
+                    <span class="sr-only" id="theme-label">Toggle theme</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -59,8 +107,8 @@
     <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
 
-        <!-- Hero Section -->
-        <section id="about" class="flex flex-col md:flex-row items-center justify-between py-20 md:space-x-12">
+    <!-- Hero Section -->
+    <section id="about" class="flex flex-col md:flex-row items-center justify-between py-12 md:space-x-12">
             <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
                 <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight text-gradient mb-4">
                     Championing the Future of Education with Technology.
@@ -78,13 +126,13 @@
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center">
-                <!-- Placeholder image for your professional headshot -->
-                <img src="https://placehold.co/400x400/161b22/c9d1d9?text=Your+Photo" alt="Your professional headshot" class="rounded-full border-4 border-card-background shadow-xl">
+                <!-- Use local profile image if available, otherwise fallback to placeholder -->
+                <img id="profile-photo" src="assets/profile.jpg" alt="Your professional headshot" onerror="(function(i){if(i.dataset.tried==='svg'){i.onerror=null;i.src='https://placehold.co/240x240/161b22/c9d1d9?text=Your+Photo';}else{i.dataset.tried='svg';i.src='assets/fallback.svg';}})(this)" class="rounded-full border-4 border-card-background shadow-xl w-40 h-40 md:w-56 md:h-56 object-cover">
             </div>
         </section>
 
         <!-- Work Section -->
-        <section id="work" class="py-20">
+        <section id="work" class="py-12">
             <h2 class="text-3xl font-bold text-center mb-12">Featured Projects</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 1 Card -->
@@ -115,7 +163,7 @@
         </section>
 
         <!-- Blog Section -->
-        <section id="blog" class="py-20">
+        <section id="blog" class="py-12">
             <h2 class="text-3xl font-bold text-center mb-12">Latest Insights</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Blog Post 1 Card -->
@@ -165,6 +213,63 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        // Theme toggle logic: toggles the `light` class on documentElement (root)
+        (function () {
+            const root = document.documentElement;
+            const toggleBtn = document.getElementById('theme-toggle');
+            const storageKey = 'site-theme'; // 'light' or 'dark'
+
+            const sunSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 4V2M12 22v-2M4.22 4.22L2.81 2.81M21.19 21.19l-1.41-1.41M4 12H2M22 12h-2M4.22 19.78l-1.41 1.41M21.19 2.81l-1.41 1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            const moonSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+            function setToggleIcon(isLight) {
+                const iconEl = document.getElementById('theme-icon');
+                const labelEl = document.getElementById('theme-label');
+                if (!iconEl || !labelEl) return;
+                if (isLight) {
+                    // show moon icon to indicate action (switch to dark)
+                    iconEl.innerHTML = moonSvg;
+                    toggleBtn.setAttribute('aria-label', 'Switch to dark theme');
+                    labelEl.textContent = 'Switch to dark theme';
+                } else {
+                    // show sun icon to indicate action (switch to light)
+                    iconEl.innerHTML = sunSvg;
+                    toggleBtn.setAttribute('aria-label', 'Switch to light theme');
+                    labelEl.textContent = 'Switch to light theme';
+                }
+            }
+
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    root.classList.add('light');
+                    setToggleIcon(true);
+                } else {
+                    root.classList.remove('light');
+                    setToggleIcon(false);
+                }
+            }
+
+            // Initialize from localStorage or prefers-color-scheme
+            const saved = localStorage.getItem(storageKey);
+            if (saved) {
+                applyTheme(saved);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                applyTheme('light');
+            } else {
+                applyTheme('dark');
+            }
+
+            // Toggle handler
+            toggleBtn.addEventListener('click', function () {
+                const isLight = root.classList.toggle('light');
+                const newTheme = isLight ? 'light' : 'dark';
+                localStorage.setItem(storageKey, newTheme);
+                applyTheme(newTheme); // ensures button text sync
+            });
+        })();
     </script>
 
 </body>

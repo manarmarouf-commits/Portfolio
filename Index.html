@@ -127,7 +127,7 @@
             </div>
             <div class="md:w-1/2 flex justify-center">
                 <!-- Use local profile image if available, otherwise fallback to placeholder -->
-                <img id="profile-photo" src="assets/profile.jpg" alt="Your professional headshot" onerror="(function(i){if(i.dataset.tried==='svg'){i.onerror=null;i.src='https://placehold.co/240x240/161b22/c9d1d9?text=Your+Photo';}else{i.dataset.tried='svg';i.src='assets/fallback.svg';}})(this)" class="rounded-full border-4 border-card-background shadow-xl w-40 h-40 md:w-56 md:h-56 object-cover">
+                <img id="profile-photo" src="assets/profile.jpg" alt="Your professional headshot" onerror="(function(i){if(!i.dataset.tried){i.dataset.tried='unknown';i.src='assets/Unknown.png';}else if(i.dataset.tried==='unknown'){i.dataset.tried='svg';i.src='assets/fallback.svg';}else{i.onerror=null;i.src='https://placehold.co/240x240/161b22/c9d1d9?text=Your+Photo';}})(this)" class="rounded-full border-4 border-card-background shadow-xl w-40 h-40 md:w-56 md:h-56 object-cover">
             </div>
         </section>
 
